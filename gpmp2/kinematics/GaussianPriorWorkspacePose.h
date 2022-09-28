@@ -80,7 +80,7 @@ public:
   void print(const std::string& s="", const gtsam::KeyFormatter& keyFormatter = gtsam::DefaultKeyFormatter) const {
     std::cout << s << "GaussianPriorWorkspacePose :" << std::endl;
     Base::print("", keyFormatter);
-    std::cout << "desired pose : "; des_pose_.print();
+    // std::cout << "desired pose : "; des_pose_.print();
   }
 
 private:

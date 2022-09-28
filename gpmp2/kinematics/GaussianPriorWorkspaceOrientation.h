@@ -82,7 +82,7 @@ public:
   void print(const std::string& s="", const gtsam::KeyFormatter& keyFormatter = gtsam::DefaultKeyFormatter) const {
     std::cout << s << "GaussianPriorWorkspaceOrientation :" << std::endl;
     Base::print("", keyFormatter);
-    std::cout << "desired orientation : "; des_orientation_.print();
+    // std::cout << "desired orientation : "; des_orientation_.print();
   }
 
 private:

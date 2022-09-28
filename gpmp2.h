@@ -456,7 +456,7 @@ class SignedDistanceField {
 };
 
 
-// planar signed distance field class
+//  signed distance field class
 #include <gpmp2/obstacle/PlanarSDF.h>
 class PlanarSDF {
   PlanarSDF(const gtsam::Point2& origin, double cell_size, const Matrix& data);
@@ -486,7 +486,6 @@ virtual class ObstacleSDFFactorGPArm : gtsam::NoiseModelFactor {
       double delta_t, double tau);
 };
 
-
 // Arm obstacle avoid factor (just planar arm with 2D signed distance field)
 #include <gpmp2/obstacle/ObstaclePlanarSDFFactorArm.h>
 
@@ -510,6 +509,20 @@ virtual class ObstaclePlanarSDFFactorGPArm : gtsam::NoiseModelFactor {
       double delta_t, double tau);
 };
 
+// // get Jacobian matrix of the collision function wrpt config for a point robot
+// #include <gpmp2/obstacle/getJacobianPlanarGPPointRobot.h>
+
+// virtual class GetJacobianGPPointRobot : gtsam::NoiseModelFactor {
+//     GetJacobianGPPointRobot(
+//             size_t pose1Key, size_t vel1Key, size_t pose2Key, size_t vel2Key,
+//             const gpmp2::PointRobotModel& pR, const gpmp2::PlanarSDF& sdf,
+//             double cost_sigma, double epsilon, const gtsam::noiseModel::Base* Qc_model,
+//             double delta_t, double tau);
+
+//     Matrix getJacobians(
+//             Vector pose1, Vector vel1, Vector pose2, Vector vel2,
+//             Matrix H1, Matrix H2, Matrix H3, Matrix H4) const;
+// };
 
 // planar obstacle avoid factor for Point Robot
 #include <gpmp2/obstacle/ObstaclePlanarSDFFactorPointRobot.h>
@@ -522,7 +535,7 @@ virtual class ObstaclePlanarSDFFactorPointRobot : gtsam::NoiseModelFactor {
 };
 
 
-// planar obstacle avoid factor with GP for Point Robot 
+// planar obstacle avoid factor with GP for Point Robot
 #include <gpmp2/obstacle/ObstaclePlanarSDFFactorGPPointRobot.h>
 
 virtual class ObstaclePlanarSDFFactorGPPointRobot : gtsam::NoiseModelFactor {

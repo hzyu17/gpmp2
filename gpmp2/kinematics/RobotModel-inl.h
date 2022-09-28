@@ -83,4 +83,3 @@ gtsam::Matrix RobotModel<FK>::sphereCentersMat(const Pose& jp) const {
 
 }
 
-

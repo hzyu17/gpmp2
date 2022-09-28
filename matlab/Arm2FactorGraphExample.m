@@ -34,7 +34,7 @@ delta_t = total_time_sec / total_time_step;
 check_inter = total_check_step / total_time_step - 1;
 
 % use GP interpolation
-use_GP_inter = true;
+use_GP_inter = false;
 
 % arm model
 arm = generateArm('SimpleTwoLinksArm');

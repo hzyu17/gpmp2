@@ -11,7 +11,6 @@
 using namespace std;
 using namespace gtsam;
 
-
 namespace gpmp2 {
 
 /* ************************************************************************** */
@@ -26,12 +25,12 @@ gtsam::Vector ObstaclePlanarSDFFactorGP<ROBOT, GPINTER>::evaluateError(
 
   // if Jacobians used, initialize Jerr_conf as zeros
   // size: arm_nr_points_ * DOF
-  Matrix Jerr_conf = Matrix::Zero(robot_.nr_body_spheres(), robot_.dof());
+  gtsam::Matrix Jerr_conf = gtsam::Matrix::Zero(robot_.nr_body_spheres(), robot_.dof());
 
 
   // get conf by interpolation, except last pose
   typename Robot::Pose conf;
-  Matrix Jconf_c1, Jconf_c2, Jconf_v1, Jconf_v2;
+  gtsam::Matrix Jconf_c1, Jconf_c2, Jconf_v1, Jconf_v2;
   if (use_H)
     conf = GPbase_.interpolatePose(conf1, vel1, conf2, vel2, Jconf_c1, Jconf_v1, Jconf_c2, Jconf_v2);
   else
@@ -40,7 +39,7 @@ gtsam::Vector ObstaclePlanarSDFFactorGP<ROBOT, GPINTER>::evaluateError(
 
   // run forward kinematics of this configuration
   vector<Point3> sph_centers;
-  vector<Matrix> J_px_jp;
+  vector<gtsam::Matrix> J_px_jp;
   if (H1)
     robot_.sphereCenters(conf, sph_centers, J_px_jp);
   else
@@ -48,7 +47,12 @@ gtsam::Vector ObstaclePlanarSDFFactorGP<ROBOT, GPINTER>::evaluateError(
 
 
   // allocate cost vector
-  Vector err(robot_.nr_body_spheres());
+  gtsam::Vector err(robot_.nr_body_spheres());
+
+//  cout << "sphere centers " << std::endl;
+//  for (auto i_center : sph_centers){
+//      cout << i_center << std::endl;
+//  }
 
   // for each point on arm stick, get error
   for (size_t sph_idx = 0; sph_idx < robot_.nr_body_spheres(); sph_idx++) {

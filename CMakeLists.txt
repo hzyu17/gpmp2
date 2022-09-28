@@ -15,7 +15,6 @@ set(GPMP2_VERSION_MINOR 3)
 set(GPMP2_VERSION_PATCH 0)
 set(gpmp2_VERSION_STRING "${GPMP2_VERSION_MAJOR}.${GPMP2_VERSION_MINOR}.${GPMP2_VERSION_PATCH}")
 
-
 # option: whether turn on Matlab toolbox
 option(GPMP2_BUILD_STATIC_LIBRARY "whether build static library" OFF)
 option(GPMP2_BUILD_MATLAB_TOOLBOX "whether build matlab toolbox, need shared lib" OFF)
@@ -24,7 +23,6 @@ option(GPMP2_BUILD_PYTHON_TOOLBOX "whether build python toolbox, need shared lib
 if(GPMP2_BUILD_STATIC_LIBRARY AND GPMP2_BUILD_MATLAB_TOOLBOX)
   message(FATAL_ERROR "matlab toolbox needs shared lib")
 endif()
-
 
 # Find GTSAM components
 find_package(GTSAM REQUIRED) # Uses installed package
@@ -35,7 +33,6 @@ find_package(GTSAMCMakeTools)
 include(GtsamMakeConfigFile)
 include(GtsamBuildTypes)
 include(GtsamTesting)
-
 
 # for unittest scripts
 set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}" "${GTSAM_DIR}/../GTSAMCMakeTools")
@@ -49,13 +46,11 @@ find_package(Boost COMPONENTS serialization REQUIRED)
 
 include_directories(${Boost_INCLUDE_DIR})
 
-
 # Generate and install config and dllexport files
 configure_file("gpmp2/config.h.in" "gpmp2/config.h")
 list(APPEND gpmp2_srcs "${PROJECT_BINARY_DIR}/gpmp2/config.h")
 include_directories(BEFORE ${PROJECT_BINARY_DIR}) # So we can include generated config header files
 install(FILES "${PROJECT_BINARY_DIR}/gpmp2/config.h" DESTINATION include/gpmp2)
-
 
 # include current source folder, at the very beginning
 include_directories(BEFORE ${CMAKE_CURRENT_SOURCE_DIR})
@@ -73,7 +68,6 @@ if(GPMP2_BUILD_MATLAB_TOOLBOX)
   add_subdirectory(matlab)
 endif()
 
-
 # Wrapping to Python
 if(GPMP2_BUILD_PYTHON_TOOLBOX)
   include_directories(${GTSAM_DIR}/cython)
@@ -83,7 +77,7 @@ if(GPMP2_BUILD_PYTHON_TOOLBOX)
 
   wrap_and_install_library_cython("gpmp2.h"
                                   "from gtsam.gtsam cimport *" # extra import of gtsam/gtsam.pxd Cython header
-                                  "${CMAKE_INSTALL_PREFIX}/cython" # install path
+                                  "${CMAKE_INSTALL_PREFIX}/cython/gpmp2" # install path
                                   gpmp2  # library to link with
                                   "gtsam"  # dependencies which need to be built before wrapping
                                   )

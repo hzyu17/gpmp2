@@ -11,6 +11,8 @@ from gpmp2_python.utils.signedDistanceField2D import signedDistanceField2D
 
 
 dataset = generate2Ddataset("MultiObstacleDataset")
+# np.savetxt("map.csv", dataset.map, delimiter=",")
+
 rows = dataset.rows
 cols = dataset.cols
 cell_size = dataset.cell_size
@@ -18,6 +20,7 @@ origin_point2 = Point2(dataset.origin_x, dataset.origin_y)
 
 # Signed Distance field
 field = signedDistanceField2D(dataset.map, cell_size)
+# np.savetxt("field_multiobs.csv", field, delimiter=",")
 sdf = PlanarSDF(origin_point2, cell_size, field)
 
 figure1 = plt.figure(0)
@@ -26,16 +29,14 @@ plotSignedDistanceField2D(
     figure1, axis1, field, dataset.origin_x, dataset.origin_y, dataset.cell_size
 )
 
-
 # settings
 total_time_sec = 10.0
-total_time_step = 20
+total_time_step = 10
 total_check_step = 50.0
 delta_t = total_time_sec / total_time_step
 check_inter = int(total_check_step / total_time_step - 1)
 
-use_GP_inter = True
-
+use_GP_inter = False
 
 # point robot model
 pR = PointRobot(2, 1)
@@ -59,7 +60,6 @@ epsilon_dist = 4.0
 pose_fix = noiseModel_Isotropic.Sigma(2, 0.0001)
 vel_fix = noiseModel_Isotropic.Sigma(2, 0.0001)
 
-
 # start and end conf
 start_conf = np.asarray([0, 0])
 start_vel = np.asarray([0, 0])
@@ -67,10 +67,8 @@ end_conf = np.asarray([17, 14])
 end_vel = np.asarray([0, 0])
 avg_vel = (end_conf / total_time_step) / delta_t
 
-
 # plot param
 pause_time = total_time_sec / total_time_step
-
 
 # init optimization
 graph = NonlinearFactorGraph()
@@ -151,7 +149,6 @@ else:
     optimizer = GaussNewtonOptimizer(graph, init_values, parameters)
 
 print("Initial Error = %d\n", graph.error(init_values))
-
 
 optimizer.optimizeSafely()
 result = optimizer.values()

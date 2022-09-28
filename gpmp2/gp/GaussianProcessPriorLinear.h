@@ -31,6 +31,7 @@ private:
   typedef gtsam::NoiseModelFactor4<gtsam::Vector, gtsam::Vector, gtsam::Vector,
       gtsam::Vector> Base;
 
+
 public:
 
   GaussianProcessPriorLinear() {}	/* Default constructor only for serialization */

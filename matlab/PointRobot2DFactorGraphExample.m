@@ -4,7 +4,7 @@
 
 close all
 clear
-
+addpath('/usr/local/gtsam_toolbox')
 %% Load libraries
 import gtsam.*
 import gpmp2.*
@@ -74,7 +74,6 @@ pause_time = total_time_sec / total_time_step;
 % plotPointRobot2D(pR_model, end_conf);
 % title('Layout')
 % hold off
-
 
 %% init optimization
 graph = NonlinearFactorGraph;

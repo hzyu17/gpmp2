@@ -62,7 +62,7 @@ end_vel = [0, 0, 0]';
 % given by joint_limit_model, although it's very near to hard constraint
 % if you need *exact* constraints, post-process the output as you want
 
-flag_limit = true;
+flag_limit = false;
 
 joint_limit_vec_down = [-1e3, -1e3, 0.0]';
 joint_limit_vec_up = [1e3, 1e3, 0.0]';
