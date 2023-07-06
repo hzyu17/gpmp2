@@ -35,7 +35,7 @@ TEST(DynamicVector, Concept) {
 
 /* ************************************************************************** */
 TEST_UNSAFE(DynamicVector, contructor) {
-  Vector a(3);
+  gtsam::Vector a(3);
   a << 1,2,3;
   DynamicVector v(a);
 
@@ -45,7 +45,7 @@ TEST_UNSAFE(DynamicVector, contructor) {
 
 /* ************************************************************************** */
 TEST_UNSAFE(DynamicVector, access_element) {
-  Vector a(3);
+  gtsam::Vector a(3);
   a << 1,2,3;
   DynamicVector v(a);
 
@@ -55,7 +55,7 @@ TEST_UNSAFE(DynamicVector, access_element) {
 
 /* ************************************************************************** */
 TEST_UNSAFE(DynamicVector, equals) {
-  Vector a(3), b(3);
+  gtsam::Vector a(3), b(3);
   a << 1,2,3;
   b << 4,5,6;
   DynamicVector v1(a), v2(a), v3(b);
@@ -67,7 +67,7 @@ TEST_UNSAFE(DynamicVector, equals) {
 
 /* ************************************************************************** */
 TEST_UNSAFE(DynamicVector, addition) {
-  Vector a(3), b(3), c(3);
+  gtsam::Vector a(3), b(3), c(3);
   a << 1,2,3;
   b << 4,5,6;
   c << 5,7,9;
@@ -80,7 +80,7 @@ TEST_UNSAFE(DynamicVector, addition) {
 
 /* ************************************************************************** */
 TEST_UNSAFE(DynamicVector, subtraction) {
-  Vector a(3), b(3), c(3);
+  gtsam::Vector a(3), b(3), c(3);
   a << 1,2,3;
   b << 4,5,6;
   c << 5,7,9;
@@ -93,7 +93,7 @@ TEST_UNSAFE(DynamicVector, subtraction) {
 /* ************************************************************************** */
 TEST_UNSAFE(DynamicVector, optimization) {
 
-  Vector a(3), b(3), c(3);
+  gtsam::Vector a(3), b(3), c(3);
   a << 1,2,3;
   b << 4,5,6;
   DynamicVector v1(a), v2(b);

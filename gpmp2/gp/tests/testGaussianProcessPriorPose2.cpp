@@ -36,7 +36,7 @@ TEST(GaussianProcessPriorPose2, Factor) {
   Vector3 v1, v2;
   Matrix actualH1, actualH2, actualH3, actualH4;
   Matrix expectH1, expectH2, expectH3, expectH4;
-  Vector actual, expect;
+  gtsam::Vector actual, expect;
 
 
   // test at origin
@@ -45,17 +45,17 @@ TEST(GaussianProcessPriorPose2, Factor) {
   v1 = (Vector3() << 0, 0, 0).finished();
   v2 = (Vector3() << 0, 0, 0).finished();
   actual = factor.evaluateError(p1, v1, p2, v2, actualH1, actualH2, actualH3, actualH4);
-  expect = (Vector(6) << 0, 0, 0, 0, 0, 0).finished();
-  expectH1 = numericalDerivative11(boost::function<Vector(const Pose2&)>(
+  expect = (gtsam::Vector(6) << 0, 0, 0, 0, 0, 0).finished();
+  expectH1 = numericalDerivative11(boost::function<gtsam::Vector(const Pose2&)>(
       boost::bind(&GaussianProcessPriorPose2::evaluateError, factor,
           _1, v1, p2, v2, boost::none, boost::none, boost::none, boost::none)), p1, 1e-6);
-  expectH2 = numericalDerivative11(boost::function<Vector(const Vector3&)>(
+  expectH2 = numericalDerivative11(boost::function<gtsam::Vector(const Vector3&)>(
       boost::bind(&GaussianProcessPriorPose2::evaluateError, factor,
           p1, _1, p2, v2, boost::none, boost::none, boost::none, boost::none)), v1, 1e-6);
-  expectH3 = numericalDerivative11(boost::function<Vector(const Pose2&)>(
+  expectH3 = numericalDerivative11(boost::function<gtsam::Vector(const Pose2&)>(
       boost::bind(&GaussianProcessPriorPose2::evaluateError, factor,
           p1, v1, _1, v2, boost::none, boost::none, boost::none, boost::none)), p2, 1e-6);
-  expectH4 = numericalDerivative11(boost::function<Vector(const Vector3&)>(
+  expectH4 = numericalDerivative11(boost::function<gtsam::Vector(const Vector3&)>(
       boost::bind(&GaussianProcessPriorPose2::evaluateError, factor,
           p1, v1, p2, _1, boost::none, boost::none, boost::none, boost::none)), v2, 1e-6);
   EXPECT(assert_equal(expect, actual, 1e-6));
@@ -71,17 +71,17 @@ TEST(GaussianProcessPriorPose2, Factor) {
   v1 = (Vector3() << 1, 0, 0).finished();
   v2 = (Vector3() << 1, 0, 0).finished();
   actual = factor.evaluateError(p1, v1, p2, v2, actualH1, actualH2, actualH3, actualH4);
-  expect = (Vector(6) << 0, 0, 0, 0, 0, 0).finished();
-  expectH1 = numericalDerivative11(boost::function<Vector(const Pose2&)>(
+  expect = (gtsam::Vector(6) << 0, 0, 0, 0, 0, 0).finished();
+  expectH1 = numericalDerivative11(boost::function<gtsam::Vector(const Pose2&)>(
       boost::bind(&GaussianProcessPriorPose2::evaluateError, factor,
           _1, v1, p2, v2, boost::none, boost::none, boost::none, boost::none)), p1, 1e-4);
-  expectH2 = numericalDerivative11(boost::function<Vector(const Vector3&)>(
+  expectH2 = numericalDerivative11(boost::function<gtsam::Vector(const Vector3&)>(
       boost::bind(&GaussianProcessPriorPose2::evaluateError, factor,
           p1, _1, p2, v2, boost::none, boost::none, boost::none, boost::none)), v1, 1e-4);
-  expectH3 = numericalDerivative11(boost::function<Vector(const Pose2&)>(
+  expectH3 = numericalDerivative11(boost::function<gtsam::Vector(const Pose2&)>(
       boost::bind(&GaussianProcessPriorPose2::evaluateError, factor,
           p1, v1, _1, v2, boost::none, boost::none, boost::none, boost::none)), p2, 1e-4);
-  expectH4 = numericalDerivative11(boost::function<Vector(const Vector3&)>(
+  expectH4 = numericalDerivative11(boost::function<gtsam::Vector(const Vector3&)>(
       boost::bind(&GaussianProcessPriorPose2::evaluateError, factor,
           p1, v1, p2, _1, boost::none, boost::none, boost::none, boost::none)), v2, 1e-4);
   EXPECT(assert_equal(expect, actual, 1e-6));
@@ -97,17 +97,17 @@ TEST(GaussianProcessPriorPose2, Factor) {
   v1 = (Vector3() << 0, 0, 1).finished();
   v2 = (Vector3() << 0, 0, 1).finished();
   actual = factor.evaluateError(p1, v1, p2, v2, actualH1, actualH2, actualH3, actualH4);
-  expect = (Vector(6) << 0, 0, 0, 0, 0, 0).finished();
-  expectH1 = numericalDerivative11(boost::function<Vector(const Pose2&)>(
+  expect = (gtsam::Vector(6) << 0, 0, 0, 0, 0, 0).finished();
+  expectH1 = numericalDerivative11(boost::function<gtsam::Vector(const Pose2&)>(
       boost::bind(&GaussianProcessPriorPose2::evaluateError, factor,
           _1, v1, p2, v2, boost::none, boost::none, boost::none, boost::none)), p1, 1e-6);
-  expectH2 = numericalDerivative11(boost::function<Vector(const Vector3&)>(
+  expectH2 = numericalDerivative11(boost::function<gtsam::Vector(const Vector3&)>(
       boost::bind(&GaussianProcessPriorPose2::evaluateError, factor,
           p1, _1, p2, v2, boost::none, boost::none, boost::none, boost::none)), v1, 1e-6);
-  expectH3 = numericalDerivative11(boost::function<Vector(const Pose2&)>(
+  expectH3 = numericalDerivative11(boost::function<gtsam::Vector(const Pose2&)>(
       boost::bind(&GaussianProcessPriorPose2::evaluateError, factor,
           p1, v1, _1, v2, boost::none, boost::none, boost::none, boost::none)), p2, 1e-6);
-  expectH4 = numericalDerivative11(boost::function<Vector(const Vector3&)>(
+  expectH4 = numericalDerivative11(boost::function<gtsam::Vector(const Vector3&)>(
       boost::bind(&GaussianProcessPriorPose2::evaluateError, factor,
           p1, v1, p2, _1, boost::none, boost::none, boost::none, boost::none)), v2, 1e-6);
   EXPECT(assert_equal(expect, actual, 1e-6));
@@ -123,16 +123,16 @@ TEST(GaussianProcessPriorPose2, Factor) {
   v1 = (Vector3() << 5, 4, 9).finished();
   v2 = (Vector3() << 0, 6, 4).finished();
   actual = factor.evaluateError(p1, v1, p2, v2, actualH1, actualH2, actualH3, actualH4);
-  expectH1 = numericalDerivative11(boost::function<Vector(const Pose2&)>(
+  expectH1 = numericalDerivative11(boost::function<gtsam::Vector(const Pose2&)>(
       boost::bind(&GaussianProcessPriorPose2::evaluateError, factor,
           _1, v1, p2, v2, boost::none, boost::none, boost::none, boost::none)), p1, 1e-6);
-  expectH2 = numericalDerivative11(boost::function<Vector(const Vector3&)>(
+  expectH2 = numericalDerivative11(boost::function<gtsam::Vector(const Vector3&)>(
       boost::bind(&GaussianProcessPriorPose2::evaluateError, factor,
           p1, _1, p2, v2, boost::none, boost::none, boost::none, boost::none)), v1, 1e-6);
-  expectH3 = numericalDerivative11(boost::function<Vector(const Pose2&)>(
+  expectH3 = numericalDerivative11(boost::function<gtsam::Vector(const Pose2&)>(
       boost::bind(&GaussianProcessPriorPose2::evaluateError, factor,
           p1, v1, _1, v2, boost::none, boost::none, boost::none, boost::none)), p2, 1e-6);
-  expectH4 = numericalDerivative11(boost::function<Vector(const Vector3&)>(
+  expectH4 = numericalDerivative11(boost::function<gtsam::Vector(const Vector3&)>(
       boost::bind(&GaussianProcessPriorPose2::evaluateError, factor,
           p1, v1, p2, _1, boost::none, boost::none, boost::none, boost::none)), v2, 1e-6);
   EXPECT(assert_equal(expectH1, actualH1, 1e-6));
@@ -165,8 +165,8 @@ TEST(GaussianProcessPriorPose2, Optimization) {
   noiseModel::Gaussian::shared_ptr Qc_model = noiseModel::Gaussian::Covariance(Qc);
 
   Pose2 pose1(0,0,0), pose2(1,0,0);
-  Vector v1 = (Vector(3) << 1, 0, 0).finished();
-  Vector v2 = (Vector(3) << 2.0, -0.5, 0.6).finished();   // rnd value
+  gtsam::Vector v1 = (gtsam::Vector(3) << 1, 0, 0).finished();
+  gtsam::Vector v2 = (gtsam::Vector(3) << 2.0, -0.5, 0.6).finished();   // rnd value
 
   NonlinearFactorGraph graph;
   graph.add(PriorFactor<Pose2>(Symbol('x', 1), pose1, model_prior));
@@ -189,8 +189,8 @@ TEST(GaussianProcessPriorPose2, Optimization) {
   EXPECT_DOUBLES_EQUAL(0, graph.error(values), 1e-6);
   EXPECT(assert_equal(pose1, values.at<Pose2>(Symbol('x', 1)), 1e-6));
   EXPECT(assert_equal(pose2, values.at<Pose2>(Symbol('x', 2)), 1e-6));
-  EXPECT(assert_equal(v1, values.at<Vector>(Symbol('v', 1)), 1e-6));
-  EXPECT(assert_equal(v1, values.at<Vector>(Symbol('v', 2)), 1e-6));
+  EXPECT(assert_equal(v1, values.at<gtsam::Vector>(Symbol('v', 1)), 1e-6));
+  EXPECT(assert_equal(v1, values.at<gtsam::Vector>(Symbol('v', 2)), 1e-6));
 }
 
 /* ************************************************************************** */

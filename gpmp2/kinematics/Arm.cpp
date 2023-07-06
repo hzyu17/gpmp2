@@ -13,8 +13,8 @@ using namespace gtsam;
 namespace gpmp2 {
 
 /* ************************************************************************** */
-Arm::Arm(size_t dof, const Vector& a, const Vector& alpha, const Vector& d,
-    const Pose3& base_pose, const Vector& theta_bias) :
+Arm::Arm(size_t dof, const gtsam::Vector& a, const gtsam::Vector& alpha, const gtsam::Vector& d,
+    const Pose3& base_pose, const gtsam::Vector& theta_bias) :
     Base(dof, dof), a_(a), alpha_(alpha), d_(d), base_pose_(base_pose),
     theta_bias_(theta_bias) {
 
@@ -29,7 +29,7 @@ Arm::Arm(size_t dof, const Vector& a, const Vector& alpha, const Vector& d,
 
 /* ************************************************************************** */
 void Arm::forwardKinematics(
-    const Vector& jp, boost::optional<const Vector&> jv,
+    const gtsam::Vector& jp, boost::optional<const gtsam::Vector&> jv,
     std::vector<gtsam::Pose3>& jpx, boost::optional<std::vector<gtsam::Vector3>&> jvx,
     boost::optional<std::vector<Matrix>&> J_jpx_jp,
     boost::optional<std::vector<Matrix>&> J_jvx_jp,

@@ -20,11 +20,11 @@ gtsam::Vector ObstacleSDFFactor<ROBOT>::evaluateError(
 
   // if Jacobians used, initialize as zeros
   // size: arm_nr_points_ * DOF
-  if (H1) *H1 = Matrix::Zero(robot_.nr_body_spheres(), robot_.dof());
+  if (H1) *H1 = gtsam::Matrix::Zero(robot_.nr_body_spheres(), robot_.dof());
 
   // run forward kinematics of this configuration
   vector<Point3> sph_centers;
-  vector<Matrix> J_px_jp;
+  vector<gtsam::Matrix> J_px_jp;
   if (H1)
     robot_.sphereCenters(conf, sph_centers, J_px_jp);
   else
@@ -32,7 +32,7 @@ gtsam::Vector ObstacleSDFFactor<ROBOT>::evaluateError(
 
 
   // allocate cost vector
-  Vector err(robot_.nr_body_spheres());
+  gtsam::Vector err(robot_.nr_body_spheres());
 
   // for each point on arm stick, get error
   for (size_t sph_idx = 0; sph_idx < robot_.nr_body_spheres(); sph_idx++) {

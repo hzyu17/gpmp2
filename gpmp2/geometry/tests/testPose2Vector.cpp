@@ -33,13 +33,13 @@ TEST(Pose2Vector, Lie) {
 /* ************************************************************************** */
 TEST(Pose2Vector, Contructors) {
   Pose2Vector p1;     // default nothing
-  Pose2Vector pi(Pose2(), Vector::Zero(3));     // manual identity
+  Pose2Vector pi(Pose2(), gtsam::Vector::Zero(3));     // manual identity
   p1 = pi;  // assignment
 
-  Vector d(6);
+  gtsam::Vector d(6);
   d << 0.1, 0.2, 0.3, 4, 5, 6;
-  Pose2Vector expected(Pose2::Expmap((Vector(3) << 0.1, 0.2, 0.3).finished()),
-      (Vector(3) << 4, 5, 6).finished());
+  Pose2Vector expected(Pose2::Expmap((gtsam::Vector(3) << 0.1, 0.2, 0.3).finished()),
+      (gtsam::Vector(3) << 4, 5, 6).finished());
   Pose2Vector p2 = p1.expmap(d);
   EXPECT(assert_equal(expected, p2, 1e-9));
   EXPECT(assert_equal(d, p1.logmap(p2), 1e-9));
@@ -47,8 +47,8 @@ TEST(Pose2Vector, Contructors) {
 
 /* ************************************************************************** */
 TEST(Pose2Vector, access) {
-  Pose2 exppose = Pose2::Expmap((Vector(3) << 0.1, 0.2, 0.3).finished());
-  Vector expvec = (Vector(3) << 4, 5, 6).finished();
+  Pose2 exppose = Pose2::Expmap((gtsam::Vector(3) << 0.1, 0.2, 0.3).finished());
+  gtsam::Vector expvec = (gtsam::Vector(3) << 4, 5, 6).finished();
   Pose2Vector pv(exppose, expvec);
   EXPECT(assert_equal(exppose, pv.pose(), 1e-9));
   EXPECT(assert_equal(expvec, pv.configuration(), 1e-9));

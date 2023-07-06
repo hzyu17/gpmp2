@@ -25,6 +25,8 @@ if(GPMP2_BUILD_STATIC_LIBRARY AND GPMP2_BUILD_MATLAB_TOOLBOX)
 endif()
 
 # Find GTSAM components
+# set(BOOST_ROOT "/home/hyu419/.local")
+# list(APPEND CMAKE_PREFIX_PATH "${BOOST_ROOT}")
 find_package(GTSAM REQUIRED) # Uses installed package
 include_directories(${GTSAM_INCLUDE_DIR})
 set(GTSAM_LIBRARIES gtsam)   # TODO: automatic search libs
@@ -34,6 +36,9 @@ include(GtsamMakeConfigFile)
 include(GtsamBuildTypes)
 include(GtsamTesting)
 
+set(BOOST_ROOT "/home/hyu419/.local/bin/boost")
+list(APPEND CMAKE_PREFIX_PATH "${BOOST_ROOT}")
+
 # for unittest scripts
 set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}" "${GTSAM_DIR}/../GTSAMCMakeTools")
 
@@ -41,7 +46,10 @@ set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}" "${GTSAM_DIR}/../GTSAMCMakeTools")
 find_package(Boost 1.50 REQUIRED)
 find_package(Boost COMPONENTS filesystem REQUIRED)
 find_package(Boost COMPONENTS system REQUIRED)
+find_package(Boost COMPONENTS atomic REQUIRED)
 find_package(Boost COMPONENTS thread REQUIRED)
+find_package(Boost REQUIRED COMPONENTS timer)
+find_package(Boost REQUIRED COMPONENTS date_time)
 find_package(Boost COMPONENTS serialization REQUIRED)
 
 include_directories(${Boost_INCLUDE_DIR})

@@ -10,6 +10,7 @@
 #pragma once
 
 #include <gtsam/base/Lie.h>
+#include <boost/optional.hpp>
 
 namespace gtsam {
 namespace internal {

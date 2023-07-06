@@ -71,22 +71,22 @@ public:
 
     using namespace gtsam;
 
-    const Vector r1 = (Vector(2*dof_) << Vector::Zero(dof_), vel1).finished();
-    Matrix Hinv, Hcomp11, Hcomp12, Hlogmap;
-    Vector r;
+    const gtsam::Vector r1 = (gtsam::Vector(2*dof_) << gtsam::Vector::Zero(dof_), vel1).finished();
+    gtsam::Matrix Hinv, Hcomp11, Hcomp12, Hlogmap;
+    gtsam::Vector r;
     if (H1 || H2 || H3 || H4)
       r = traits<T>::Logmap(traits<T>::Compose(traits<T>::Inverse(pose1, Hinv),
           pose2, Hcomp11, Hcomp12), Hlogmap);
     else
       r = traits<T>::Logmap(traits<T>::Compose(traits<T>::Inverse(pose1, Hinv), pose2));
-    const Vector r2 = (Vector(2*dof_) << r, vel2).finished();
+    const gtsam::Vector r2 = (gtsam::Vector(2*dof_) << r, vel2).finished();
 
     T pose;
     if (H1 || H2 || H3 || H4) {
-      Matrix Hcomp21, Hcomp22, Hexp;
+      gtsam::Matrix Hcomp21, Hcomp22, Hexp;
       pose = traits<T>::Compose(pose1, traits<T>::Expmap(Lambda_.block(0, 0, dof_, 2*dof_) * r1
           + Psi_.block(0, 0, dof_, 2*dof_) * r2, Hexp), Hcomp21, Hcomp22);
-      Matrix Hexpr1 = Hcomp22*Hexp;
+      gtsam::Matrix Hexpr1 = Hcomp22*Hexp;
       if (H1) *H1 = Hcomp21 + Hexpr1*Psi_.block(0, 0, dof_, dof_)*Hlogmap*Hcomp11*Hinv;
       if (H2) *H2 = Hexpr1*Lambda_.block(0, dof_, dof_, dof_);
       if (H3) *H3 = Hexpr1*Psi_.block(0, 0, dof_, dof_)*Hlogmap*Hcomp12;
@@ -121,17 +121,17 @@ public:
 
     using namespace gtsam;
 
-    const Vector r1 = (Vector(2*dof_) << Vector::Zero(dof_), vel1).finished();
-    Matrix Hinv, Hcomp11, Hcomp12, Hlogmap;
-    Vector r;
+    const gtsam::Vector r1 = (gtsam::Vector(2*dof_) << gtsam::Vector::Zero(dof_), vel1).finished();
+    gtsam::Matrix Hinv, Hcomp11, Hcomp12, Hlogmap;
+    gtsam::Vector r;
     if (H1 || H2 || H3 || H4)
       r = traits<T>::Logmap(traits<T>::Compose(traits<T>::Inverse(pose1, Hinv),
           pose2, Hcomp11, Hcomp12), Hlogmap);
     else
       r = traits<T>::Logmap(traits<T>::Compose(traits<T>::Inverse(pose1, Hinv), pose2));
-    const Vector r2 = (Vector(2*dof_) << r, vel2).finished();
+    const gtsam::Vector r2 = (gtsam::Vector(2*dof_) << r, vel2).finished();
 
-    Vector vel;
+    gtsam::Vector vel;
     if (H1 || H2 || H3 || H4) {
       vel = Lambda_.block(dof_, 0, dof_, 2*dof_) * r1 + Psi_.block(dof_, 0, dof_, 2*dof_) * r2;
       if (H1) *H1 = Psi_.block(dof_, 0, dof_, dof_)*Hlogmap*Hcomp11*Hinv;
